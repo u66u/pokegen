@@ -3,4 +3,4 @@ from gen import Generation
 
 t = Generation()
 
-res = t.generate_and_save_images(2) 
+res = t.generate_images(2) 
