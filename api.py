@@ -9,25 +9,23 @@ import time
 
 class OpenAiAPI:
 
-    @cached_property
     def IsOpenaiEnabled(self):
-
         load_dotenv()
-        if os.getenv("OPENAI_API_KEY") is none:
+        if os.getenv("OPENAI_API_KEY") is None:
             print(
                 "\033[91m"
                 + "warning: openai api key not found. openai cannot not be used."
                 + "\033[0m"
             )
-            return false
+            return False
         else:
-            return true
+            return True
 
-    @retry(tries=3, delay=3.0)
+
+    retry(tries=3, delay=3.0)
     def ApiCall(self, prompt: str, n: int = 1):
-
         load_dotenv()
-        if not self.is_openai_enabled:
+        if not self.IsOpenaiEnabled:
             return None
 
         openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -41,13 +39,14 @@ class OpenAiAPI:
         )
 
         if 'choices' in response and response['choices']:
-            return response
+            return response['choices'][0]['message']['content']
+
         else:
             raise ValueError("Invalid response structure or empty choices in response")
 
+
     @retry(tries=3, delay=3.0)
     def ImageCall(self, prompt: str, model: str = None, size: str='256x256', n: int = 1):
-
         load_dotenv()
         if not self.is_openai_enabled:
             return None
@@ -71,7 +70,6 @@ class ProdiaAPI:
 
     @cached_property
     def IsProdiaEnabled(self):
-
         load_dotenv()
         if os.getenv("PRODIA_API_KEY") is None or os.getenv("PRODIA_API_KEY") == "":
             print(
@@ -84,17 +82,16 @@ class ProdiaAPI:
             return True
 
     
-    def ProdiaImageCall():
-        
+    def ProdiaImageCall(self, prompt:str):
         load_dotenv()
         PRODIA_API_KEY = os.getenv('PRODIA_API_KEY')
-        PRODIA_IMAGE_MODEL = os.getenv('PRODIA_IMAGE_MODEL', 'v1-5-pruned-emaonly.safetensors [d7049739]')
+        PRODIA_IMAGE_MODEL = os.getenv('PRODIA_IMAGE_MODEL', 'Realistic_Vision_V5.0.safetensors [614d1063]')
         
         url = "https://api.prodia.com/v1/sd/generate"
         
         payload = {
             "model": PRODIA_IMAGE_MODEL,
-            "prompt": "puppies in a cloud, 4k",
+            "prompt": prompt,
             "negative_prompt": "badly drawn",
             "steps": 20,
             "cfg_scale": 7,

@@ -1,4 +1,6 @@
-from api import ProdiaAPI
+from api import ProdiaAPI, OpenAiAPI
+from gen import Generation
 
-prod = ProdiaAPI.ProdiaImageCall()
-print(prod)
+t = Generation()
+
+res = t.generate_and_save_images(2) 
