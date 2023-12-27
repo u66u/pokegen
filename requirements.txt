@@ -2,5 +2,4 @@ openai==0.28
 python-dotenv
 retry
 pillow
-typing_extensions
-prodiapy
+requests
