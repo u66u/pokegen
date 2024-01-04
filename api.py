@@ -67,7 +67,7 @@ class OpenAiAPI:
     
 
 class ProdiaAPI:
-
+    
     @cached_property
     def IsProdiaEnabled(self):
         load_dotenv()

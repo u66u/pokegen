@@ -1,6 +1,5 @@
 from api import ProdiaAPI, OpenAiAPI
 from gen import Generation
+from cards import render_random_card
 
-t = Generation()
-
-res = t.generate_images(2) 
+render_random_card()
