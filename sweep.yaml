@@ -6,7 +6,8 @@ rules:
   - "All new business logic should have corresponding unit tests."
   - "Refactor large functions to be more modular."
   - "Add docstrings to all functions and file headers."
-
+  - "All classes and functions must have a description of their purpose and example usage on the next line after their definition. Use triple quotation marks to do that: """ explanation here """."
+  - "Follow PEP8"
 # This is the branch that Sweep will develop from and make pull requests to. Most people use 'main' or 'master' but some users also use 'dev' or 'staging'.
 branch: 'main'
 
@@ -18,7 +19,7 @@ gha_enabled: True
 # Example:
 #
 # description: sweepai/sweep is a python project. The main api endpoints are in sweepai/api.py. Write code that adheres to PEP8.
-description: ''
+description: 'u66u/pokegen is a random pokemon card generator that uses OpenAIs api to create prompts for image generation AI models with Prodia API. After an image and the description are generated, we render a pokemon card of the necessary type'
 
 # This sets whether to create pull requests as drafts. If this is set to True, then all pull requests will be created as drafts and GitHub Actions will not be triggered.
 draft: False
