@@ -6,6 +6,8 @@ import requests
 
 class Generation:
 
+    '''Responsible for generating and saving cards, automatically manages Openai and Prodia APIs'''
+
     def __init__(self):
         self.openai_api = OpenAiAPI()
         self.prodia_api = ProdiaAPI()
@@ -14,7 +16,9 @@ class Generation:
         types = ['Fire', 'Water', 'Grass', 'Electric', 'Psychic', 'Ice',
                  'Dragon', 'Dark', 'Fairy', 'Normal', 'Fighting', 'Flying', 
                  'Poison', 'Ground', 'Rock', 'Bug', 'Ghost', 'Steel']
+
         properties = ['cute', 'fierce', 'mysterious', 'legendary', 'tiny', 'huge']
+        
         selected_type = random.choice(types)
         selected_property = random.choice(properties)
         return f"Create a {selected_property} {selected_type}-type Pokémon."
