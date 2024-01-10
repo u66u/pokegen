@@ -71,9 +71,11 @@ class OpenAiAPI:
     
 
 class ProdiaAPI:
+    """This class provides methods for interacting with the Prodia API."""
 
     @cached_property
     def IsProdiaEnabled(self):
+        """This method checks if the Prodia API is enabled by checking if the PRODIA_API_KEY environment variable is set."""
         load_dotenv()
         if os.getenv("PRODIA_API_KEY") is None or os.getenv("PRODIA_API_KEY") == "":
             print(
@@ -87,6 +89,7 @@ class ProdiaAPI:
 
     
     def ProdiaImageCall(self, prompt:str):
+        """This method makes an image call to the Prodia API with a given prompt and returns the response. The prompt is used to generate the image."""
         load_dotenv()
         PRODIA_API_KEY = os.getenv('PRODIA_API_KEY')
         PRODIA_IMAGE_MODEL = os.getenv('PRODIA_IMAGE_MODEL', 'Realistic_Vision_V5.0.safetensors [614d1063]')
