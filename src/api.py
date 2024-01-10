@@ -8,8 +8,10 @@ import time
 
 
 class OpenAiAPI:
+    """This class provides methods for interacting with the OpenAI API."""
 
     def IsOpenaiEnabled(self):
+        """This method checks if the OpenAI API is enabled by checking if the OPENAI_API_KEY environment variable is set."""
         load_dotenv()
         if os.getenv("OPENAI_API_KEY") is None:
             print(
@@ -24,6 +26,7 @@ class OpenAiAPI:
 
     retry(tries=3, delay=3.0)
     def ApiCall(self, prompt: str, n: int = 1):
+        """This method makes an API call to the OpenAI API with a given prompt and returns the response. The number of responses can be specified with the 'n' parameter."""
         load_dotenv()
         if not self.IsOpenaiEnabled:
             return None
@@ -47,6 +50,7 @@ class OpenAiAPI:
 
     @retry(tries=3, delay=3.0)
     def ImageCall(self, prompt: str, model: str = None, size: str='256x256', n: int = 1):
+        """This method makes an image call to the OpenAI API with a given prompt and returns the response. The model, size, and number of responses can be specified with the 'model', 'size', and 'n' parameters respectively."""
         load_dotenv()
         if not self.is_openai_enabled:
             return None
