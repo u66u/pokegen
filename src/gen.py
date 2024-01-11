@@ -5,6 +5,7 @@ import random
 import requests
 
 class Generation:
+    """Handles the generation and saving of Pokemon cards using OpenAI and Prodia APIs."""
     '''Handles the generation and saving of Pokemon cards using OpenAI and Prodia APIs.'''
 
     def __init__(self):
@@ -13,6 +14,11 @@ class Generation:
         self.prodia_api = ProdiaAPI()
 
     def generate_prompt(self):
+        """Generates a prompt to create a Pokémon card based on random types and properties.
+
+        Returns:
+            str: A string prompt that combines a random property and type.
+        """
         '''Generates a prompt to create a Pokémon card based on random types and properties.
 
         Returns:
@@ -29,6 +35,12 @@ class Generation:
         return f"Create a {selected_property} {selected_type}-type Pokémon."
 
     def saveimg(self, image_url, destination):
+        """Saves an image from a given URL to the specified destination.
+
+        Args:
+            image_url (str): The URL of the image to save.
+            destination (Path): The path to save the image file.
+        """
         '''Saves an image from a given URL to the specified destination.
 
         Args:
@@ -41,6 +53,11 @@ class Generation:
         del response
 
     def generate_images(self, n):
+        """Generates pokemon images based on prompts using the OpenAI and Prodia APIs.
+
+        Args:
+            n (int): The number of images to generate.
+        """
         output_dir = Path('output')
         output_dir.mkdir(parents=True, exist_ok=True)
 
