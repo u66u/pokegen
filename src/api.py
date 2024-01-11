@@ -8,8 +8,20 @@ import time
 
 
 class OpenAiAPI:
+    """
+    Represents an interface to interact with the OpenAI API.
+
+    This class provides methods to check if OpenAI services can be used,
+    and to make various API calls to generate text or images using OpenAI models.
+    """
 
     def IsOpenaiEnabled(self):
+        """
+        Checks whether the OpenAI API is enabled by verifying the availability of the API key.
+
+        Returns:
+            bool: True if the OpenAI API key is found, False otherwise.
+        """
         load_dotenv()
         if os.getenv("OPENAI_API_KEY") is None:
             print(
@@ -24,6 +36,16 @@ class OpenAiAPI:
 
     retry(tries=3, delay=3.0)
     def ApiCall(self, prompt: str, n: int = 1):
+        """
+        Makes an API call to OpenAI to generate text based on a given prompt.
+
+        Args:
+            prompt (str): The prompt to pass to the OpenAI model.
+            n (int, optional): The number of completions to generate. Defaults to 1.
+
+        Returns:
+            str: The generated text from the model.
+        """
         load_dotenv()
         if not self.IsOpenaiEnabled:
             return None
@@ -47,6 +69,18 @@ class OpenAiAPI:
 
     @retry(tries=3, delay=3.0)
     def ImageCall(self, prompt: str, model: str = None, size: str='256x256', n: int = 1):
+        """
+        Makes an API call to OpenAI to generate an image based on a prompt.
+
+        Args:
+            prompt (str): The prompt to pass to the OpenAI image-generation model.
+            model (str, optional): The model to use for image generation. Defaults to the model specified in the environment variable.
+            size (str, optional): The resolution of the generated image. Defaults to '256x256'.
+            n (int, optional): The number of images to generate. Defaults to 1.
+
+        Returns:
+            str: The URL of the generated image.
+        """
         load_dotenv()
         if not self.is_openai_enabled:
             return None
@@ -67,9 +101,21 @@ class OpenAiAPI:
     
 
 class ProdiaAPI:
+    """
+    Represents an interface to interact with the Prodia API.
+
+    This class provides methods to check if Prodia services can be used,
+    and to make an API call to generate images using Prodia models.
+    """
 
     @cached_property
     def IsProdiaEnabled(self):
+        """
+        Checks whether the Prodia API is enabled by verifying the availability of the API key.
+
+        Returns:
+            bool: True if the Prodia API key is found, False otherwise.
+        """
         load_dotenv()
         if os.getenv("PRODIA_API_KEY") is None or os.getenv("PRODIA_API_KEY") == "":
             print(
@@ -83,6 +129,15 @@ class ProdiaAPI:
 
     
     def ProdiaImageCall(self, prompt:str):
+        """
+        Makes an API call to Prodia to generate an image based on a given prompt.
+
+        Args:
+            prompt (str): The prompt to pass to the Prodia image-generation model.
+
+        Returns:
+            str: The URL of the generated image or an error message if generation failed.
+        """
         load_dotenv()
         PRODIA_API_KEY = os.getenv('PRODIA_API_KEY')
         PRODIA_IMAGE_MODEL = os.getenv('PRODIA_IMAGE_MODEL', 'Realistic_Vision_V5.0.safetensors [614d1063]')
