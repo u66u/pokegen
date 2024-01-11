@@ -5,14 +5,19 @@ import random
 import requests
 
 class Generation:
-
-    '''Responsible for generating and saving cards, automatically manages Openai and Prodia APIs'''
+    '''Handles the generation and saving of Pokemon cards using OpenAI and Prodia APIs.'''
 
     def __init__(self):
+        '''Initializes the Generation class, creating instances for OpenAiAPI and ProdiaAPI.'''
         self.openai_api = OpenAiAPI()
         self.prodia_api = ProdiaAPI()
 
     def generate_prompt(self):
+        '''Generates a prompt to create a Pokémon card based on random types and properties.
+
+        Returns:
+            str: A string prompt that combines a random property and type.
+        '''
         types = ['Fire', 'Water', 'Grass', 'Electric', 'Psychic', 'Ice',
                  'Dragon', 'Dark', 'Fairy', 'Normal', 'Fighting', 'Flying', 
                  'Poison', 'Ground', 'Rock', 'Bug', 'Ghost', 'Steel']
@@ -24,6 +29,12 @@ class Generation:
         return f"Create a {selected_property} {selected_type}-type Pokémon."
 
     def saveimg(self, image_url, destination):
+        '''Saves an image from a given URL to the specified destination.
+
+        Args:
+            image_url (str): The URL of the image to save.
+            destination (Path): The path to save the image file.
+        '''
         response = requests.get(image_url, stream=True)
         with open(destination, 'wb') as out_file:
             shutil.copyfileobj(response.raw, out_file)
