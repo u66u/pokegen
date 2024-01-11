@@ -5,8 +5,8 @@
 rules:
   - "All new business logic should have corresponding unit tests."
   - "Refactor large functions to be more modular."
-  - "Do not delete any files."
-  - "All classes and functions must have a description of their purpose and example usage on the next line after their definition. Use docstrings - triple quotation marks to do that: """ explanation here """."
+  - "If you delete any files, provide a clear explanation why"
+  - "All classes and functions must have a description of their purpose and example usage on the next line after their definition. Use docstrings - triple quotation marks to do that"
   - "Follow PEP8"
 # This is the branch that Sweep will develop from and make pull requests to. Most people use 'main' or 'master' but some users also use 'dev' or 'staging'.
 branch: 'main'
